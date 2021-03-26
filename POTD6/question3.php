@@ -25,7 +25,7 @@
       </font>
     </h1>
 
-    <h3>Question 3: What is your favorite pasttime?</h3>
+    <h3>Question 3: What is your favorite pastime?</h3>
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
       <input type="text" name="pasttime" class="form-control" autofocus required /> <br />
       <input type="submit" value="Submit" class="btn btn-light"  />
@@ -33,18 +33,24 @@
 
     <br/>
     <div id="prevAnswer">
-      Previous question: you answered
+        Previous answers: <br/>
       <font color="green" style="font-style:italic">
-        <?php if (isset($_SESSION['favorite_instr'])) echo $_SESSION['favorite_instr'] ?>
+          <?php if (isset($_SESSION['lunch'])) echo 'You had ' . $_SESSION['lunch'] . 'for lunch <br/>' ?>
+          <?php if (isset($_SESSION['favorite_instr'])) echo 'Your favorite instructor is ' . $_SESSION['favorite_instr'] . '<br/>' ?>
       </font>
     </div>
+      <?php
+      if (!isset($_SESSION) || !isset($_SESSION['password']) || !isset($_SESSION['username'])) {
+          header("Location: login.php");
+      }
+      ?>
 
 <?php
 // If form is submitted, save the information
 if (isset($_POST['pasttime']))
 {
   $_SESSION['pasttime'] = $_POST['pasttime'];
-  header('Location: logout.php');
+  header('Location: question4.php');
 }
 ?>
 

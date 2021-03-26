@@ -30,6 +30,12 @@
       <input type="text" name="lunch" class="form-control" autofocus required /> <br />
       <input type="submit" value="Submit" class="btn btn-light"  />
     </form>
+
+      <?php
+      if (!isset($_SESSION) || !isset($_SESSION['password']) || !isset($_SESSION['username'])) {
+          header("Location: login.php");
+      }
+      ?>
   </div>
 
 <?php

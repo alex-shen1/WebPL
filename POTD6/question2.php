@@ -40,11 +40,16 @@
 
     <br/>
     <div id="prevAnswer">
-      Previous question: you answered
+        Previous answers: <br/>
       <font color="green" style="font-style:italic">
-        <?php if (isset($_SESSION['lunch'])) echo $_SESSION['lunch'] ?>
+        <?php if (isset($_SESSION['lunch'])) echo 'You had '. $_SESSION['lunch']. ' for lunch <br/>'?>
       </font>
     </div>
+      <?php
+      if (!isset($_SESSION) || !isset($_SESSION['password']) || !isset($_SESSION['username'])) {
+          header("Location: login.php");
+      }
+      ?>
 
   </div>
 
