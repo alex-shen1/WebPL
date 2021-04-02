@@ -98,7 +98,7 @@ function insertData()
 
   $query = "INSERT INTO courses (course_ID, course_desc)
               VALUES (:course_id, :course_desc)";
-              
+
   $statement = $db -> prepare($query);
   $statement -> bindValue(':course_id', $course_id_form);
   $statement -> bindValue(':course_desc', $course_desc_form);
@@ -115,12 +115,16 @@ function insertData()
 function selectData()
 {
   global $db; // Name needs to match connect-db.php
-  $query = "SELECT * FROM courses
-            ";
+  $query = "SELECT * FROM courses";
   $statement = $db -> prepare($query);
   $statement -> execute();
 
+  $results = $statement -> fetchAll();
+
   $statement -> closeCursor();
+
+  foreach ($results as $result)
+    echo $result['course_ID'] . ":" . $result['course_desc'] . "<br/>";
 }
 ?>
 
@@ -129,16 +133,25 @@ function selectData()
 /** update data **/
 function updateData()
 {
+  global $db; // Name needs to match connect-db.php
 
+  $course_id_form = 'cs1111';   // retrieve from form
+  $course_desc_form = 'cs1111';   // retrieve from form
 
+  $query = "UPDATE courses
+            SET course_desc = :course_desc
+            WHERE course_ID = :course_id";
+  $statement = $db -> prepare($query);
+  $statement -> bindValue(':course_id', $course_id_form);
+  $statement -> bindValue(':course_desc', $course_desc_form);
+  $statement -> execute();
 
+  $results = $statement -> fetchAll();
 
+  $statement -> closeCursor();
 
-
-
-
-
-
+  foreach ($results as $result)
+    echo $result['course_ID'] . ":" . $result['course_desc'] . "<br/>";
 }
 ?>
 
@@ -147,16 +160,22 @@ function updateData()
 /** delete data **/
 function deleteData()
 {
+  global $db; // Name needs to match connect-db.php
 
+  $course_id_form = 'cs1111';   // retrieve from form
 
+  $query = "DELETE FROM courses
+            WHERE course_ID = :course_id";
+  $statement = $db -> prepare($query);
+  $statement -> bindValue(':course_id', $course_id_form);
+  $statement -> execute();
 
+  $results = $statement -> fetchAll();
 
+  $statement -> closeCursor();
 
-
-
-
-
-
+  foreach ($results as $result)
+    echo $result['course_ID'] . ":" . $result['course_desc'] . "<br/>";
 }
 ?>
 
