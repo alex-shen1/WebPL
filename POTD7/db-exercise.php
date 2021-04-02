@@ -57,14 +57,15 @@ if (isset($_GET['btnaction']))
 function createTable()
 {
   global $db; // Name needs to match connect-db.php
-  $query = `CREATE TABLE courses (
-              course_ID VARCHAR(8) PRIMARY KEY
+  $query = "CREATE TABLE courses (
+              course_ID VARCHAR(8) PRIMARY KEY,
               course_desc VARCHAR(225) NOT NULL
-            )`;
+            )";
   $statement = $db -> prepare($query);
   $statement -> execute();
 
   $statement -> closeCursor();
+  echo "Created courses table";
 }
 ?>
 
@@ -74,11 +75,12 @@ function createTable()
 function dropTable()
 {
   global $db; // Name needs to match connect-db.php
-  $query = `DROP TABLE courses`;
+  $query = "DROP TABLE courses";
   $statement = $db -> prepare($query);
   $statement -> execute();
 
   $statement -> closeCursor();
+  echo "Dropped courses table";
 }
 ?>
 
@@ -88,14 +90,14 @@ function dropTable()
 function insertData()
 {
   global $db; // Name needs to match connect-db.php
-  // $query = `INSERT INTO courses (course_ID, course_desc)
-  //             VALUES ('cs4640', 'WebPL')`;
+  // $query = "INSERT INTO courses (course_ID, course_desc)
+  //             VALUES ('cs4640', 'WebPL')";
 
   $course_id_form = 'cs1111';   // retrieve from form
   $course_desc_form = 'cs1111';   // retrieve from form
 
-  $query = `INSERT INTO courses (course_ID, course_desc)
-              VALUES (:course_id, :course_desc)`;
+  $query = "INSERT INTO courses (course_ID, course_desc)
+              VALUES (:course_id, :course_desc)";
               
   $statement = $db -> prepare($query);
   $statement -> bindValue(':course_id', $course_id_form);
@@ -103,6 +105,7 @@ function insertData()
   $statement -> execute();
 
   $statement -> closeCursor();
+  echo "Inserted course (cs1111, cs1111)";
 }
 ?>
 
@@ -112,8 +115,8 @@ function insertData()
 function selectData()
 {
   global $db; // Name needs to match connect-db.php
-  $query = `SELECT * FROM courses
-            `;
+  $query = "SELECT * FROM courses
+            ";
   $statement = $db -> prepare($query);
   $statement -> execute();
 
