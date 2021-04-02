@@ -56,16 +56,15 @@ if (isset($_GET['btnaction']))
 /** create table **/
 function createTable()
 {
+  global $db; // Name needs to match connect-db.php
+  $query = `CREATE TABLE courses (
+              course_ID VARCHAR(8) PRIMARY KEY
+              course_desc VARCHAR(225) NOT NULL
+            )`;
+  $statement = $db -> prepare($query);
+  $statement -> execute();
 
-
-
-
-
-
-
-
-
-
+  $statement -> closeCursor();
 }
 ?>
 
@@ -74,15 +73,12 @@ function createTable()
 /** drop table **/
 function dropTable()
 {
+  global $db; // Name needs to match connect-db.php
+  $query = `DROP TABLE courses`;
+  $statement = $db -> prepare($query);
+  $statement -> execute();
 
-
-
-
-
-
-
-
-
+  $statement -> closeCursor();
 }
 ?>
 
@@ -91,15 +87,22 @@ function dropTable()
 /** insert data **/
 function insertData()
 {
+  global $db; // Name needs to match connect-db.php
+  // $query = `INSERT INTO courses (course_ID, course_desc)
+  //             VALUES ('cs4640', 'WebPL')`;
 
+  $course_id_form = 'cs1111';   // retrieve from form
+  $course_desc_form = 'cs1111';   // retrieve from form
 
+  $query = `INSERT INTO courses (course_ID, course_desc)
+              VALUES (:course_id, :course_desc)`;
+              
+  $statement = $db -> prepare($query);
+  $statement -> bindValue(':course_id', $course_id_form);
+  $statement -> bindValue(':course_desc', $course_desc_form);
+  $statement -> execute();
 
-
-
-
-
-
-
+  $statement -> closeCursor();
 }
 ?>
 
@@ -108,16 +111,13 @@ function insertData()
 /** get data **/
 function selectData()
 {
+  global $db; // Name needs to match connect-db.php
+  $query = `SELECT * FROM courses
+            `;
+  $statement = $db -> prepare($query);
+  $statement -> execute();
 
-
-
-
-
-
-
-
-
-
+  $statement -> closeCursor();
 }
 ?>
 
@@ -149,7 +149,7 @@ function deleteData()
 
 
 
-	
+
 
 
 
