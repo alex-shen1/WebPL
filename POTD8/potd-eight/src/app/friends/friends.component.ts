@@ -8,19 +8,26 @@ import { Friend } from '../friend';
   styleUrls: ['./friends.component.css']
 })
 export class FriendsComponent implements OnInit {
-  friendname: string;  // name property
-
   friend: Friend;
   friend2: Friend;
 
-  constructor() {
-    this.friendname = 'someone';
+  manyfriends = [
+   { name: 'Mickey', email: 'mickey@uva.edu' },
+   { name: 'Minnie', email: 'minnie@uva.edu' },
+   { name: 'duh', email: 'duh@uva.edu' },
+   { name: 'huh', email: 'huh@uva.edu' }
+  ];
 
+  constructor() {
     this.friend = new Friend('Humpty', 'humpty@uva.edu');
     this.friend2 = new Friend('Dumpty', 'dumpty@uva.edu');
   }
 
   ngOnInit(): void {
+  }
+
+  changeDefaultName(str: string) {
+    this.friend.name = str;
   }
 
 }

@@ -1,8 +1,47 @@
-<p>Hello {{ friendname }} </p>
+<p [style.color]="'green'">Enter your friends' information below!</p>
 
-<p>Friend's information:
-  name ={{ friend.name }},
-  email = {{ friend.email }} </p>
-<p>{{ friend | json }} </p>
+<div *ngIf="friend.name=='Humpty'">Current friend: Humpty</div>
 
-<p [style.color]="'green'">Are you hungry?</p>
+<form #infoForm="ngForm">
+   <div class="form-group">
+      <label for="name">Friend name:</label>
+      <!-- One-way binding to view: [ngModel]="friend.name" -->
+      <!-- Two-way binding to view & model: [(ngModel)]="friend.name" -->
+      <input [(ngModel)]="friend.name"
+             (blur) = "changeDefaultName(friend.name + 'wacky')"
+             type="text" class="form-control" name="friendname" />
+   </div>
+   <div class="form-group">
+      <label for="comment">Email:</label>
+      <input [(ngModel)]="friend.email" type="email" class="form-control" name="email" />
+   </div>
+   <button (click)="changeDefaultName('Default')" class="btn btn-primary">Reset name</button>
+</form>
+
+<br><hr>
+
+<h5>Retrieve data from above form</h5>
+<p>{{ infoForm.value | json }}</p>
+<p>name: {{ infoForm.value.friendname }}</p>
+<p>email: {{ infoForm.value.email }}</p>
+
+<h5>Retrieve data from model</h5>
+<p>name: {{ friend.name }}</p>
+<p>email: {{ friend.email }}</p>
+
+
+<br><hr>
+
+<h4>List of many friends</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tr *ngFor="let myfriend of manyfriends">
+    <td>{{ myfriend.name | uppercase }}</td>
+    <td>{{ myfriend.email | lowercase }}</td>
+  </tr>
+</table>
