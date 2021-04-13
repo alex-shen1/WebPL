@@ -46,7 +46,7 @@
       </font>
     </div>
       <?php
-      if (!isset($_SESSION) || !isset($_SESSION['password']) || !isset($_SESSION['username'])) {
+      if (!isset($_SESSION) || !isset($_SESSION['pwd']) || !isset($_SESSION['user'])) {
           header("Location: login.php");
       }
       ?>

@@ -18,24 +18,20 @@
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
         Name: <input type="text" name="username" class="form-control" autofocus required/> <br/>
         Password: <input type="password" name="pwd" class="form-control" required/> <br/>
-        <input type="submit" value="Sign in" class="btn btn-light"/>
+        <input type="submit" value="Sign in" class="btn btn-success"/>
     </form>
 
-    <div class="my-5 w-100">
-        <div class="alert alert-danger" role="alert">
-            <?php
-            authenticate();
-            ?>
-        </div>
-    </div>
+    <?php
+    authenticate();
+    ?>
 </div>
 
 <?php
-//if ($_SERVER['REQUEST_METHOD'] == 'POST' & isset($_POST['username'])) {
-//    $_SESSION['user'] = $_POST['username'];
-//    $_SESSION['pwd'] = $_POST['pwd'];
-//    header('Location: survey-instruction.php');
-//}
+if ($_SERVER['REQUEST_METHOD'] == 'POST' & isset($_POST['username'])) {
+   $_SESSION['user'] = $_POST['username'];
+   $_SESSION['pwd'] = $_POST['pwd'];
+   // header('Location: survey-instruction.php');
+}
 
 ?>
 
