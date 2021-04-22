@@ -78,7 +78,7 @@
 
 <header>
     <nav class="navbar navbar-expand-md bg-info navbar-dark">
-        <a class="navbar-brand" href="#">WebPL POTD 4: PHP Form Handling</a>
+        <a class="navbar-brand" href="#">WebPL POTD 5: Login Form Authentication</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -107,6 +107,9 @@
                value="<?php if (isset($_GET['attempt'])) echo $_GET['attempt'] + 1; else echo 1 ?>">
         <input type="submit" value="Submit"
                class="btn btn-secondary" <?php if (isset($_GET['attempt']) && $_GET['attempt'] >= 3) echo 'disabled' ?>/>
+
+        <?php if (isset($_GET['attempt'])) echo $_GET['attempt']; else echo "Not set" ?>
+
     </form>
 
     <?php
@@ -147,7 +150,7 @@ function authenticate()
         } else if (isset($_GET['attempt']) && $_GET['attempt'] >= 3) {
             echo '
         <div class="my-5 w-100">
-            <div class="alert alert-danger" role="alert">            
+            <div class="alert alert-danger" role="alert">
             You have attempted to login 3 times unsuccessfully. We have locked your ability to log in.
             </div>
         </div>';
