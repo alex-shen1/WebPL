@@ -80,7 +80,7 @@
       <label class="form-check-label">Send me a text message when my order is ready </label>
     </div>
 
-    <button class="btn btn-primary"
+    <button class="btn btn-primary" type="submit"
           [disabled]="!orderForm.form.valid"
           (click)="confirmOrder(orderForm.value)"
           title="always enabled">
